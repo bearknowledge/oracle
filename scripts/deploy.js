@@ -7,16 +7,12 @@
 const hre = require("hardhat");
 
 async function main() {
-
-
-  const PriceFeed = await hre.ethers.getContractFactory("PriceFeed");
+  const PriceFeed = await hre.ethers.getContractFactory("DynamicPriceRequest");
   const priceFeed = await PriceFeed.deploy();
 
   await priceFeed.deployed();
 
-  console.log(
-    `deployed to ${priceFeed.address}`
-  );
+  console.log(`deployed to ${priceFeed.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
