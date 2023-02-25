@@ -42,8 +42,8 @@ constructor () {
     
     function fulfill(
         uint256[] calldata prices
-        //pass in an array and loop through the values to update
-    ) private onlyOwner {
+        //will need to make contract upgradeable
+    ) public onlyOwner {
         Index["xci"] = IndexInfo(prices[0], block.timestamp);
         Index["hype6"] = IndexInfo(prices[1], block.timestamp);
         Index["sp50"] = IndexInfo(prices[2], block.timestamp);
@@ -51,10 +51,3 @@ constructor () {
     }
        
     }
-
-    /**
-     * Allow withdraw of Link tokens from the contract
-     */
-    // function withdrawGas() public onlyOwner {
-    
-    // 

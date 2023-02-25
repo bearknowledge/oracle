@@ -36,19 +36,30 @@ describe("PriceFeed", function () {
   //   });
   // });
 
-  // describe("Check fulfill function", function () {
-  //   it("check the fufillment function", async function () {
-  //     const { owner, priceFeed } = await loadFixture(deployContractFixture);
-  //     const fulfill = await priceFeed.fulfill(
-  //       ethers.utils.parseUnits("0", 18),
-  //       ethers.utils.parseUnits("330.25", 18),
-  //       "UDCFTT"
-  //     );
-  //     const receipt = await fulfill.wait();
-  //     console.log("$" + ethers.utils.formatEther(receipt.events[0].args.price))
-  //     // expect(receipt.events[0].args.filled).to.equal(false);
-  //   });
-  // });
+  describe("Check fulfill function", function () {
+    it("check the fufillment function", async function () {
+      const { owner, priceFeed } = await loadFixture(deployContractFixture);
+      const fulfill = await priceFeed.fulfill([
+        ethers.utils.parseUnits("160", 18),
+        ethers.utils.parseUnits("330.25", 18),
+        ethers.utils.parseUnits("275.50", 18)
+      ]
+      );
+      const receipt = await fulfill.wait();
+      console.log("$" + ethers.utils.formatEther(receipt.events[0].args.prices[0]))
+      console.log("$" + ethers.utils.formatEther(receipt.events[0].args.prices[1]))
+      console.log("$" + ethers.utils.formatEther(receipt.events[0].args.prices[2]))
+      const xci = await priceFeed.Index("xci")
+      const xciPrice = ethers.utils.formatEther(xci["price"])
+      const hype6 = await priceFeed.Index("hype6")
+      const hype6Price = ethers.utils.formatEther(hype6["price"])
+      const sp50 = await priceFeed.Index("sp50")
+      const sp50Price = ethers.utils.formatEther(sp50["price"])
+      expect(Number(xciPrice)).to.equal(160.0);
+      expect(Number(hype6Price)).to.equal(330.25);
+      expect(Number(sp50Price)).to.equal(275.50);
+    });
+  });
 
   // describe("RequestId Check", function () {
   //   it("check the request Id", async function () {
