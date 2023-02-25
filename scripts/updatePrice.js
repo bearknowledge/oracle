@@ -6,6 +6,7 @@ async function main() {
     "0x6ED76dC30b53f81D560F11b081445Fc83815b94C"
   );
 
+
   const fulfill = await contract.fulfill(
     ethers.utils.parseUnits("0", 18),
     ethers.utils.parseUnits("330.25", 18),
